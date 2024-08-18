@@ -45,7 +45,7 @@ function ChildComponent({ createAction }: any) {
 
   return (
     <div className="h-90v border-black border">
-
+ 
       <div className="w-full h-1/2 flex flex-row">
         <div className="border border-black flex-1">1</div>
         <div className="border border-black w-40">2</div>
