@@ -47,7 +47,7 @@ function ChildComponent({ createAction }: any) {
     setCoilsState()
   }, [state])
 
-
+{/* added click on orders show coils */}
 
   return (
     <div className="h-90v border-black border">
