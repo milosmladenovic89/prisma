@@ -36,12 +36,11 @@ export async function GetAllCoils() {
 }
 
 
-export async function create({id}: any) {
-        const coils = await prisma.coils.findUnique({
-                where: {
-                        id:id,
-                        
+export async function create({order}: any) {
+        const coils = await prisma.coils.findMany({
+                where:{
+                        order:order
                 }
         })
-        console.log(coils, 'ID : ' + id)
+        return coils
 }
