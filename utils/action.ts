@@ -44,3 +44,17 @@ export async function create({order}: any) {
         })
         return coils
 }
+
+
+import { PrismaClient as PrismaClient1 } from '../generated/client1';
+import { PrismaClient as PrismaClient2 } from '../generated/client2';
+
+const prisma1 = new PrismaClient1();
+const prisma2 = new PrismaClient2();
+
+// Example usage
+export async function fetchData() {
+    const data1 = await prisma1.coils.findMany();
+    const data2 = await prisma2.coils2.findMany();
+    console.log(data1, data2);
+  }

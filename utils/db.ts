@@ -18,3 +18,10 @@ export default prisma
 
 
 if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
+
+
+
+  
+  /*
+  how to create two databases in ine prisma projects mysql php phpmyadmin nextjs + typescript  in one projet
+  */
