@@ -51,7 +51,7 @@ export async function create2({ order }: any) {
                         order: order
                 }
         })
-        
+
         return coils
 }
 
@@ -60,6 +60,8 @@ export async function create2({ order }: any) {
 
 import { PrismaClient as PrismaClient1 } from '../generated/client1';
 import { PrismaClient as PrismaClient2 } from '../generated/client2';
+import { Coils } from "@/app/move/page"
+import { useRouter } from "next/router"
 
 const prisma1 = new PrismaClient1();
 const prisma2 = new PrismaClient2();
@@ -95,3 +97,47 @@ export async function AddToSecondDatabase(formData: FormData) {
 
 
 }
+
+export async function moveFromOneDbToOther(order: Array<Coils>) {
+
+        const orderToMove = order.map(item => ({
+                id: item.id,
+                order: item.order,
+                number: item.number,
+                width: item.width,
+                thick: item.thick,
+                createAt: item.createAt,
+        }));
+
+        await prisma.coils.createMany({
+                data: orderToMove,
+        });
+
+
+        revalidatePath('/move')
+
+}
+
+export async function moveTOFirstDatabase(order: Array<Coils>) {
+
+        const orderToMove = order.map(item => ({
+                id: item.id,
+                order: item.order,
+                number: item.number,
+                width: item.width,
+                thick: item.thick,
+                createAt: item.createAt,
+        }));
+
+        await prisma2.coils2.createMany({
+                data: orderToMove,
+        });
+
+
+        revalidatePath('/move')
+
+}
+
+
+
+

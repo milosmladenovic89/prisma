@@ -1,6 +1,6 @@
 'use client';
 
-import { create, create2, fetchDataFromSecondDatabase, GetAllCoils } from "@/utils/action";
+import { create, create2, fetchDataFromSecondDatabase, GetAllCoils, moveFromOneDbToOther, moveTOFirstDatabase } from "@/utils/action";
 import { useEffect, useState } from "react";
 
 export type Coils = {
@@ -29,9 +29,7 @@ function ChildComponent({ createAction, createAction2 }: any) {
 
   };
 
-  useEffect(()=>{
-    console.log(order)
-  },[order])
+
 
   const handleSubmit2 = async (newState: string | undefined) => {
     await createAction2({ order: newState });
@@ -95,6 +93,7 @@ function ChildComponent({ createAction, createAction2 }: any) {
   }, [state, state2])
 
 
+
   return (
     <div className="h-80v border-black border flex">
 
@@ -123,7 +122,7 @@ function ChildComponent({ createAction, createAction2 }: any) {
                 )
                 .map((item: Coils) => (
                   <tbody key={item.id} className=" cursor-pointer">
-                    <tr className=" hover:bg-cyan-500"
+                    <tr className={item.order === order[0].order ? "bg-red-300" : "bg-white"}
                       onClick={() => {
                         handleSubmit(item.order);
                         setState(item.order)
@@ -151,11 +150,21 @@ function ChildComponent({ createAction, createAction2 }: any) {
 
           <div className="border border-black w-40 flex flex-col justify-evenly">
 
-            <button className="btn btn-accent m-5">
+            <button className="btn btn-accent m-5"
+              onClick={() => {
+                moveTOFirstDatabase(order)
+                setState(order[0].order)
+              }}
+            >
               &#8594;
             </button>
 
-            <button className="btn btn-accent m-5">
+            <button className="btn btn-accent m-5"
+              onClick={() => {
+                moveFromOneDbToOther(order2)
+                setState(order[0].order)
+              }}
+            >
               &#8592;
             </button>
 
@@ -180,7 +189,8 @@ function ChildComponent({ createAction, createAction2 }: any) {
                 )
                 .map((item: Coils) => (
                   <tbody key={item.id} className=" cursor-pointer">
-                    <tr className=" hover:bg-cyan-500"
+                    <tr
+                      className={item.order === order2[0].order ? "bg-blue-300" : "bg-white"}
                       onClick={() => {
                         handleSubmit2(item.order);
                         setState2(item.order)
