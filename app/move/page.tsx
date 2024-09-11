@@ -88,11 +88,15 @@ function ChildComponent({ createAction, createAction2 }: any) {
 
     }
 
-
     setCoilsState()
   }, [state, state2])
 
-
+  useEffect(() => {
+    console.log(order.length > 0  &&  order[0].order)
+  }, [order])
+  useEffect(() => {
+    console.log(order2.length > 0  &&  order2[0].order)
+  }, [order2])
 
   return (
     <div className="h-80v border-black border flex">
@@ -153,7 +157,9 @@ function ChildComponent({ createAction, createAction2 }: any) {
             <button className="btn btn-accent m-5"
               onClick={() => {
                 moveTOFirstDatabase(order)
+                setState2(order2[0].order)
                 setState(order[0].order)
+
               }}
             >
               &#8594;
@@ -163,6 +169,7 @@ function ChildComponent({ createAction, createAction2 }: any) {
               onClick={() => {
                 moveFromOneDbToOther(order2)
                 setState(order[0].order)
+                setState2(order2[0].order)
               }}
             >
               &#8592;
