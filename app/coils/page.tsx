@@ -6,7 +6,7 @@ export default async function CoilsPage() {
     return (
         <div>
 
-            <form className='m-20' action={AddCoilToDatabase}>
+            <form className='m-20' action={AddToSecondDatabase}>
                 <label htmlFor="number">Number</label><br />
                 <input className=' input input-success mx-2' id='number' type={'text'} content='number' name='number' /><br />
                 <label htmlFor="order">Order</label><br />

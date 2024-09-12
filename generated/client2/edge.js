@@ -116,7 +116,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\milos\\OneDrive\\Desktop\\prisma\\prisma\\generated\\client2",
+      "value": "C:\\Users\\Milos Mladenovic\\Desktop\\prisma\\prisma\\generated\\client2",
       "fromEnvVar": null
     },
     "config": {
@@ -130,7 +130,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\milos\\OneDrive\\Desktop\\prisma\\prisma\\prisma\\schema2.prisma",
+    "sourceFilePath": "C:\\Users\\Milos Mladenovic\\Desktop\\prisma\\prisma\\prisma\\schema2.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
