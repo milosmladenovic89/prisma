@@ -83,11 +83,13 @@ function ChildComponent({ createAction, createAction2 }: any) {
     const coils = await GetAllCoils();
     if (coils && coils.length > 0) {
       const order = coils[0].order;
+      setCoil(coils)
       setState(order);
       SetOrderState(order);
     } else {
       setState(undefined);
       SetOrderState(undefined);
+      setCoil([])
     }
   }
 
@@ -95,11 +97,13 @@ function ChildComponent({ createAction, createAction2 }: any) {
     const coils2 = await fetchDataFromSecondDatabase();
     if (coils2 && coils2.length > 0) {
       const order2 = coils2[0].order;
+      setCoil2(coils2)
       setState2(order2);
       SetOrderState2(order2);
     } else {
       setState2(undefined);
       SetOrderState2(undefined)
+      setCoil2([])
     }
   }
 
