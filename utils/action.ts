@@ -2,7 +2,12 @@
 
 import { revalidatePath } from "next/cache"
 import prisma from "./db"
+import { PrismaClient as PrismaClient1 } from '../generated/client1';
+import { PrismaClient as PrismaClient2 } from '../generated/client2';
+import { Coils } from "@/app/move/page"
 
+const prisma1 = new PrismaClient1();
+const prisma2 = new PrismaClient2();
 
 
 
@@ -12,7 +17,7 @@ export async function AddCoilToDatabase(formData: FormData,) {
         const width = formData.get('width')
         const thick = formData.get('thick')
 
-        await prisma.coils.create({
+        await prisma1.coils.create({
                 data: {
                         number: number?.toString(),
                         order: order?.toString(),
@@ -26,7 +31,7 @@ export async function AddCoilToDatabase(formData: FormData,) {
 }
 
 export async function GetAllCoils() {
-        const coils = await prisma.coils.findMany({
+        const coils = await prisma1.coils.findMany({
                 orderBy: {
                         width:'asc'
                                 
@@ -37,7 +42,7 @@ export async function GetAllCoils() {
 
 
 export async function create({ order }: any) {
-        const coils = await prisma.coils.findMany({
+        const coils = await prisma1.coils.findMany({
                 where: {
                         order: order
                 }
@@ -59,12 +64,7 @@ export async function create2({ order }: any) {
 
 
 
-import { PrismaClient as PrismaClient1 } from '../generated/client1';
-import { PrismaClient as PrismaClient2 } from '../generated/client2';
-import { Coils } from "@/app/move/page"
 
-const prisma1 = new PrismaClient1();
-const prisma2 = new PrismaClient2();
 
 // Example usage
 export async function fetchDataFromSecondDatabase() {
@@ -111,7 +111,7 @@ export async function moveFromOneDbToOther(order: Array<Coils>) {
                 createAt: item.createAt,
         }));
 
-        await prisma.coils.createMany({
+        await prisma1.coils.createMany({
                 data: orderToMove,
         });
 
@@ -130,7 +130,7 @@ export async function moveFromOneDbToOther(order: Array<Coils>) {
 export async function moveTOFirstDatabase(order: Array<Coils>) {
         const coilID = order.map((item) => item.id)
         const flattenedCoilID = coilID.flat();
-        console.log(coilID)
+      
         const orderToMove = order.map(item => ({
                 id: item.id,
                 order: item.order,
@@ -145,7 +145,7 @@ export async function moveTOFirstDatabase(order: Array<Coils>) {
         });
 
 
-        await prisma.coils.deleteMany({
+        await prisma1.coils.deleteMany({
                 where: {
                         id:{
                                 in:flattenedCoilID

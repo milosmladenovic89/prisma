@@ -51,39 +51,77 @@ function ChildComponent({ createAction, createAction2 }: any) {
   useEffect(() => {
     async function SetOrderStateAtLoading() {
       const coils = await GetAllCoils()
-      const order = coils[0].order
-      const filteredItems = coils.filter(item => item.order === order);
-      setOrder(filteredItems)
-    }
 
+      if (coils && coils.length > 0) {
+        const order = coils[0].order
+        const filteredItems = coils.filter(item => item.order === order);
+        setOrder(filteredItems)
+      } else {
+        setOrder([])
+      }
+    }
 
     async function SetOrderStateAtLoading2() {
       const coils2 = await fetchDataFromSecondDatabase()
-      const order2 = coils2[0].order
-      const filteredItems2 = coils2.filter(item => item.order === order2);
-      setOrder2(filteredItems2)
-    }
+      if (coils2 && coils2.length > 0) {
+        const order2 = coils2[0].order;
+        const filteredItems2 = coils2.filter(item => item.order === order2);
+        setOrder2(filteredItems2);
+      } else {
 
+        setOrder2([]);
+      }
+    }
 
     SetOrderStateAtLoading()
     SetOrderStateAtLoading2()
   }, [])
+
+
+
+  async function fetchAndSetOrderState() {
+    const coils = await GetAllCoils();
+    if (coils && coils.length > 0) {
+      const order = coils[0].order;
+      setState(order);
+      SetOrderState(order);
+    } else {
+      setState(undefined);
+      SetOrderState(undefined);
+    }
+  }
+
+  async function fetchAndSetOrderState2() {
+    const coils2 = await fetchDataFromSecondDatabase();
+    if (coils2 && coils2.length > 0) {
+      const order2 = coils2[0].order;
+      setState2(order2);
+      SetOrderState2(order2);
+    } else {
+      setState2(undefined);
+      SetOrderState2(undefined)
+    }
+  }
+
 
   useEffect(() => {
     async function setCoilsState() {
       const coils = await GetAllCoils()
       const coils2 = await fetchDataFromSecondDatabase()
 
-      if (coils.length > 0) {
+      if (coils && coils.length > 0) {
         setCoil(coils);
         setState(coils[0].order)
-
+      } else {
+        setCoil([])
       }
 
-      if (coils2.length > 0) {
+
+      if (coils2 && coils2.length > 0) {
         setCoil2(coils2);
         setState2(coils2[0].order)
-
+      } else {
+        setCoil2([])
       }
 
     }
@@ -91,12 +129,6 @@ function ChildComponent({ createAction, createAction2 }: any) {
     setCoilsState()
   }, [state, state2])
 
-  useEffect(() => {
-    console.log(order.length > 0  &&  order[0].order)
-  }, [order])
-  useEffect(() => {
-    console.log(order2.length > 0  &&  order2[0].order)
-  }, [order2])
 
   return (
     <div className="h-80v border-black border flex">
@@ -126,7 +158,7 @@ function ChildComponent({ createAction, createAction2 }: any) {
                 )
                 .map((item: Coils) => (
                   <tbody key={item.id} className=" cursor-pointer">
-                    <tr className={item.order === order[0].order ? "bg-red-300" : "bg-white"}
+                    <tr className={order && order.length > 0 && item.order === order[0].order ? "bg-red-300" : "bg-white"}
                       onClick={() => {
                         handleSubmit(item.order);
                         setState(item.order)
@@ -155,21 +187,24 @@ function ChildComponent({ createAction, createAction2 }: any) {
           <div className="border border-black w-40 flex flex-col justify-evenly">
 
             <button className="btn btn-accent m-5"
-              onClick={() => {
-                moveTOFirstDatabase(order)
-                setState2(order2[0].order)
-                setState(order[0].order)
-
+              onClick={async () => {
+                await moveTOFirstDatabase(order)
+                await fetchAndSetOrderState()
+                await fetchAndSetOrderState2()
+                //await order2 && order2.length > 0 ? setState2(order2[0].order) : setState2(undefined)
+                //await order && order.length > 0 ? setState(order[0].order) : setState(undefined)
               }}
             >
               &#8594;
             </button>
 
             <button className="btn btn-accent m-5"
-              onClick={() => {
-                moveFromOneDbToOther(order2)
-                setState(order[0].order)
-                setState2(order2[0].order)
+              onClick={async () => {
+                await moveFromOneDbToOther(order2)
+                await fetchAndSetOrderState()
+                await fetchAndSetOrderState2()
+                //await order && order.length > 0 ? setState(order[0].order) : setState(undefined)
+                //await order2 && order2.length > 0 ? setState2(order2[0].order) : setState2(undefined)
               }}
             >
               &#8592;
@@ -197,7 +232,7 @@ function ChildComponent({ createAction, createAction2 }: any) {
                 .map((item: Coils) => (
                   <tbody key={item.id} className=" cursor-pointer">
                     <tr
-                      className={item.order === order2[0].order ? "bg-blue-300" : "bg-white"}
+                      className={order2 && order2.length > 0 && item.order === order2[0].order ? "bg-blue-300" : "bg-white"}
                       onClick={() => {
                         handleSubmit2(item.order);
                         setState2(item.order)
