@@ -4,25 +4,45 @@ import { revalidatePath } from "next/cache"
 import prisma from "./db"
 import { PrismaClient as PrismaClient1 } from '../generated/client1';
 import { PrismaClient as PrismaClient2 } from '../generated/client2';
+import { PrismaClient as PrismaClient3 } from '../generated/client3';
 import { Coils } from "@/app/move/page"
 
 const prisma1 = new PrismaClient1();
 const prisma2 = new PrismaClient2();
-
+const prisma3 = new PrismaClient3();
 
 
 export async function AddCoilToDatabase(formData: FormData,) {
-        const number = formData.get('number')
-        const order = formData.get('order')
-        const width = formData.get('width')
-        const thick = formData.get('thick')
+        const number = formData.get('number')?.toString() || '';
+        const order = formData.get('order')?.toString() || '';
+        const width = formData.get('width') ? Number(formData.get('width')) : 0;
+        const thick = formData.get('thick') ? Number(formData.get('thick')) : 0;
 
         await prisma1.coils.create({
                 data: {
-                        number: number?.toString(),
-                        order: order?.toString(),
-                        width: Number(width),
-                        thick: Number(thick),
+                        number,
+                        order,
+                        width,
+                        thick,
+                        createAt: new Date()
+                }
+        });
+        revalidatePath('/coils')
+
+}
+
+export async function AddCoilToTHIRDdatabase(formData: FormData,) {
+        const number = formData.get('number')?.toString() || '';
+        const order = formData.get('order')?.toString() || '';
+        const width = formData.get('width') ? Number(formData.get('width')) : 0;
+        const thick = formData.get('thick') ? Number(formData.get('thick')) : 0;
+
+        await prisma3.coils3.create({
+                data: {
+                        number,
+                        order,
+                        width,
+                        thick,
                         createAt: new Date()
                 }
         })
@@ -30,11 +50,21 @@ export async function AddCoilToDatabase(formData: FormData,) {
 
 }
 
+export async function GetAllCoilsFromTHIRDdatabase() {
+        const coils = await prisma3.coils3.findMany({
+                orderBy: {
+                        id: 'desc'
+
+                }
+        })
+        return coils
+}
+
 export async function GetAllCoils() {
         const coils = await prisma1.coils.findMany({
                 orderBy: {
-                        width:'asc'
-                                
+                        width: 'asc'
+
                 }
         })
         return coils
@@ -71,7 +101,7 @@ export async function fetchDataFromSecondDatabase() {
 
         const data = await prisma2.coils2.findMany({
                 orderBy: {
-                        width:'asc'
+                        width: 'asc'
                 }
         });
 
@@ -80,10 +110,10 @@ export async function fetchDataFromSecondDatabase() {
 
 
 export async function AddToSecondDatabase(formData: FormData) {
-        const number = formData.get('number')
-        const order = formData.get('order')
-        const width = formData.get('width')
-        const thick = formData.get('thick')
+        const number = formData.get('number')?.toString() || '';
+        const order = formData.get('order')?.toString() || '';
+        const width = formData.get('width') ? Number(formData.get('width')) : 0;
+        const thick = formData.get('thick') ? Number(formData.get('thick')) : 0;
         await prisma2.coils2.create({
                 data: {
                         number: number?.toString(),
@@ -101,11 +131,11 @@ export async function AddToSecondDatabase(formData: FormData) {
 export async function moveFromOneDbToOther(order: Array<Coils>) {
 
         const coilID = order.map((item) => item.id)
-        const flattenedCoilID =coilID.flat()
+        const flattenedCoilID = coilID.flat()
         const orderToMove = order.map(item => ({
                 id: item.id,
                 order: item.order,
-                number: item.number,
+                number: item.number || "",
                 width: item.width,
                 thick: item.thick,
                 createAt: item.createAt,
@@ -117,8 +147,8 @@ export async function moveFromOneDbToOther(order: Array<Coils>) {
 
         await prisma2.coils2.deleteMany({
                 where: {
-                        id:{
-                                in:flattenedCoilID
+                        id: {
+                                in: flattenedCoilID
                         }
                 }
         })
@@ -130,11 +160,11 @@ export async function moveFromOneDbToOther(order: Array<Coils>) {
 export async function moveTOFirstDatabase(order: Array<Coils>) {
         const coilID = order.map((item) => item.id)
         const flattenedCoilID = coilID.flat();
-      
+
         const orderToMove = order.map(item => ({
                 id: item.id,
                 order: item.order,
-                number: item.number,
+                number: item.number || "",
                 width: item.width,
                 thick: item.thick,
                 createAt: item.createAt,
@@ -147,8 +177,8 @@ export async function moveTOFirstDatabase(order: Array<Coils>) {
 
         await prisma1.coils.deleteMany({
                 where: {
-                        id:{
-                                in:flattenedCoilID
+                        id: {
+                                in: flattenedCoilID
                         }
                 }
         })

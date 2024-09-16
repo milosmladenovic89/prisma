@@ -1,12 +1,12 @@
-import { AddCoilToDatabase, AddToSecondDatabase, GetAllCoils } from '@/utils/action'
+import { AddCoilToDatabase, AddCoilToTHIRDdatabase, AddToSecondDatabase, GetAllCoils, GetAllCoilsFromTHIRDdatabase } from '@/utils/action'
 import React from 'react'
 
 export default async function CoilsPage() {
-    const coils = await GetAllCoils()
+    const coils = await GetAllCoilsFromTHIRDdatabase()
     return (
         <div>
 
-            <form className='m-20' action={AddCoilToDatabase}>
+            <form className='m-20' action={AddCoilToTHIRDdatabase}>
                 <label htmlFor="number">Number</label><br />
                 <input className=' input input-success mx-2' id='number' type={'text'} content='number' name='number' /><br />
                 <label htmlFor="order">Order</label><br />

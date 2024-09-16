@@ -2,6 +2,7 @@
 
 import { create, create2, fetchDataFromSecondDatabase, GetAllCoils, moveFromOneDbToOther, moveTOFirstDatabase } from "@/utils/action";
 import { useEffect, useState } from "react";
+import ProgramNumbers from "../components/ProgramNumbers";
 
 export type Coils = {
   id: number
@@ -137,7 +138,9 @@ function ChildComponent({ createAction, createAction2 }: any) {
   return (
     <div className="h-80v border-black border flex">
 
-      <div className=" w-48 border border-red-700">1</div>
+      <div className=" w-48 border border-red-700 overflow-y-scroll">
+        <ProgramNumbers/>
+      </div>
 
 
       <div className="w-full">
