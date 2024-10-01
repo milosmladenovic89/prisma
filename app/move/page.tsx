@@ -2,7 +2,7 @@
 
 import { create, create2, fetchDataFromSecondDatabase, GetAllCoils, moveFromOneDbToOther, moveTOFirstDatabase } from "@/utils/action";
 import { useEffect, useState } from "react";
-import ProgramNumbers from "../components/ProgramNumbers";
+
 
 export type Coils = {
   id: number
@@ -27,27 +27,20 @@ function ChildComponent({ createAction, createAction2 }: any) {
 
   const handleSubmit = async (newState: string | undefined) => {
     await createAction({ order: newState });
-
   };
-
-
 
   const handleSubmit2 = async (newState: string | undefined) => {
     await createAction2({ order: newState });
-
   };
 
   async function SetOrderState(newState: string | undefined) {
     const orderState = await create({ order: newState })
     setOrder(orderState)
   }
-
-
   async function SetOrderState2(newState: string | undefined) {
     const orderState2 = await create2({ order: newState })
     setOrder2(orderState2)
   }
-
 
   useEffect(() => {
     async function SetOrderStateAtLoading() {
@@ -69,16 +62,12 @@ function ChildComponent({ createAction, createAction2 }: any) {
         const filteredItems2 = coils2.filter(item => item.order === order2);
         setOrder2(filteredItems2);
       } else {
-
         setOrder2([]);
       }
     }
-
     SetOrderStateAtLoading()
     SetOrderStateAtLoading2()
   }, [])
-
-
 
   async function fetchAndSetOrderState() {
     const coils = await GetAllCoils();
@@ -121,14 +110,12 @@ function ChildComponent({ createAction, createAction2 }: any) {
         setCoil([])
       }
 
-
       if (coils2 && coils2.length > 0) {
         setCoil2(coils2);
         setState2(coils2[0].order)
       } else {
         setCoil2([])
       }
-
     }
 
     setCoilsState()
@@ -136,16 +123,10 @@ function ChildComponent({ createAction, createAction2 }: any) {
 
 
   return (
-    <div className="h-80v border-black border flex">
-
-      <div className=" w-48 border border-red-700 overflow-y-scroll">
-        <ProgramNumbers/>
-      </div>
+    <div className="h-80v border-black border flex w-full">
 
 
       <div className="w-full">
-
-
         <div className="w-full h-1/2 flex flex-row">
           <div className="border border-black flex-1 overflow-y-scroll">
 
@@ -153,7 +134,7 @@ function ChildComponent({ createAction, createAction2 }: any) {
               <thead>
                 <tr>
                   <th>Order</th>
-                  <th>ID</th>
+                  <th>Sum: {order.length}</th>
                   <th>Width</th>
                   <th>Thick</th>
                   <th>Created</th>
@@ -179,18 +160,11 @@ function ChildComponent({ createAction, createAction2 }: any) {
                       <td>{item.thick}</td>
                       <td>{item.createAt.toDateString()}</td>
                     </tr>
-
-
                   </tbody>
                 ))
               }
-
             </table>
-
-
           </div>
-
-
           <div className="border border-black w-40 flex flex-col justify-evenly">
 
             <button className="btn btn-accent m-5"
@@ -244,7 +218,6 @@ function ChildComponent({ createAction, createAction2 }: any) {
                         handleSubmit2(item.order);
                         setState2(item.order)
                         SetOrderState2(item.order)
-
                       }}
                     >
                       <td >
@@ -255,22 +228,12 @@ function ChildComponent({ createAction, createAction2 }: any) {
                       <td>{item.thick}</td>
                       <td>{item.createAt.toDateString()}</td>
                     </tr>
-
-
                   </tbody>
                 ))
               }
-
             </table>
-
           </div>
-
         </div>
-
-
-
-
-
 
         <div className="w-full h-1/2 flex flex-row">
           <div className="border border-black flex-1 overflow-y-scroll">
@@ -288,7 +251,6 @@ function ChildComponent({ createAction, createAction2 }: any) {
 
               {order.map((item: Coils) => (
                 <tbody key={item.id}>
-
                   <tr>
                     <td>{item.number}</td>
                     <td>{item.order}</td>
@@ -296,17 +258,12 @@ function ChildComponent({ createAction, createAction2 }: any) {
                     <td>{item.thick}</td>
                     <td>{item.createAt.toLocaleTimeString()}</td>
                   </tr>
-
                 </tbody>
               ))}
-
             </table>
-
-
           </div>
+
           <div className="border border-black w-40">2 down</div>
-
-
           <div className="border border-black flex-1 overflow-x-auto">
 
             <table className="table">
@@ -335,13 +292,9 @@ function ChildComponent({ createAction, createAction2 }: any) {
               ))}
 
             </table>
-
           </div>
-
         </div>
-
-        <button className="btn btn-primary mt-2" >New Program</button>
-
+        
       </div>
     </div >
   );

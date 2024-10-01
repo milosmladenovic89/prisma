@@ -121,10 +121,8 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.Coils3ScalarFieldEnum = {
   id: 'id',
-  number: 'number',
-  order: 'order',
-  width: 'width',
-  thick: 'thick',
+  status: 'status',
+  numberCoils: 'numberCoils',
   createAt: 'createAt'
 };
 

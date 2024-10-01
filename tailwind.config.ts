@@ -15,6 +15,8 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       width: {
+        '70v': '70vw',
+        '80v': '80vw',
         '85': '350px',
         '32p': '32%',
         '500p': '500px',
@@ -24,6 +26,11 @@ const config: Config = {
         '1200p': '1200px',
       },
       height: {
+        '39pro': '39%',
+        '45pro': '45%',
+        '60pro': '60%',
+        '70pro': '70%',
+        '75v': '75vh',
         '80v': '80vh',
         '90v': '90vh',
         '95v': '95vh',

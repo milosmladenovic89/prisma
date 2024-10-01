@@ -6,7 +6,7 @@
 
 generator client {
   provider = "prisma-client-js"
-  output = "../generated/client3"
+  output   = "../generated/client3"
 }
 
 datasource db3 {
@@ -15,11 +15,8 @@ datasource db3 {
 }
 
 model Coils3 {
-  id     Int    @id @default(autoincrement())
-  number String @unique
-  order  String
-  width  Int
-  thick  Int
-  createAt DateTime @default(now())
+  id          Int      @id @default(autoincrement())
+  status      Boolean
+  numberCoils Int
+  createAt    DateTime @default(now())
 }
-

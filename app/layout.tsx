@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import ProgramNumbers from "./components/ProgramNumbers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,11 +20,38 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <nav className=" navbar bg-slate-300 p-5">
-          <Link className="mx-5" href={'/'}>home</Link>
+          <Link className="mx-5" href={'/'}>Home</Link>
+          <Link className="mx-5" href={'/move'}>Move</Link>
           <Link href={'/coils'}>coils</Link>
-          <Link className="mx-5" href={'/move'}>Move coils</Link>
         </nav>
-        {children}
+
+
+        <div className="flex">
+
+          < div className=" w-48 border border-red-700 overflow-y-scroll">
+            <ProgramNumbers />
+          </div>
+
+          {children}
+
+
+        </div>
+
+        <div>
+
+          <button className="btn btn-primary m-2 w-32" >
+            <Link href={'/new'}>
+              New Program
+            </Link>
+          </button>
+
+          <button className="btn btn-primary m-2 w-32" >Delete</button>
+          <button className="btn btn-primary m-2 w-32" >Save</button>
+          <button className="btn btn-primary m-2 w-32" >Cancel</button>
+          <button className="btn btn-primary m-2 w-32" >Finalize</button>
+          <button className="btn btn-primary m-2 w-32" >Remove</button>
+          <button className="btn btn-primary m-2 w-32" >Report</button>
+        </div>
       </body>
     </html>
   );

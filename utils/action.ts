@@ -1,7 +1,6 @@
 'use server'
 
 import { revalidatePath } from "next/cache"
-import prisma from "./db"
 import { PrismaClient as PrismaClient1 } from '../generated/client1';
 import { PrismaClient as PrismaClient2 } from '../generated/client2';
 import { PrismaClient as PrismaClient3 } from '../generated/client3';
@@ -10,6 +9,29 @@ import { Coils } from "@/app/move/page"
 const prisma1 = new PrismaClient1();
 const prisma2 = new PrismaClient2();
 const prisma3 = new PrismaClient3();
+
+
+
+export async function FilteredCoils(widthMin: number, widthMax: number): Promise<{
+        id: number;
+        number: string;
+        order: string;
+        width: number;
+        thick: number;
+        createAt: Date;
+    }[]> {
+        const coils = await prisma1.coils.findMany({
+            where: {
+                width: {
+                    gte: widthMin,
+                    lte: widthMax,
+                },
+            },
+        });
+       
+        return coils;
+    }
+    
 
 
 export async function AddCoilToDatabase(formData: FormData,) {
@@ -31,24 +53,8 @@ export async function AddCoilToDatabase(formData: FormData,) {
 
 }
 
-export async function AddCoilToTHIRDdatabase(formData: FormData,) {
-        const number = formData.get('number')?.toString() || '';
-        const order = formData.get('order')?.toString() || '';
-        const width = formData.get('width') ? Number(formData.get('width')) : 0;
-        const thick = formData.get('thick') ? Number(formData.get('thick')) : 0;
 
-        await prisma3.coils3.create({
-                data: {
-                        number,
-                        order,
-                        width,
-                        thick,
-                        createAt: new Date()
-                }
-        })
-        revalidatePath('/coils')
 
-}
 
 export async function GetAllCoilsFromTHIRDdatabase() {
         const coils = await prisma3.coils3.findMany({
