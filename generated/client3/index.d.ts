@@ -850,66 +850,98 @@ export namespace Prisma {
   }
 
   export type Coils3AvgAggregateOutputType = {
-    id: number | null
+    programID: number | null
     numberCoils: number | null
+    width: number | null
+    thick: number | null
   }
 
   export type Coils3SumAggregateOutputType = {
-    id: number | null
+    programID: number | null
     numberCoils: number | null
+    width: number | null
+    thick: number | null
   }
 
   export type Coils3MinAggregateOutputType = {
-    id: number | null
+    programID: number | null
     status: boolean | null
     numberCoils: number | null
+    number: string | null
+    order: string | null
+    width: number | null
+    thick: number | null
     createAt: Date | null
   }
 
   export type Coils3MaxAggregateOutputType = {
-    id: number | null
+    programID: number | null
     status: boolean | null
     numberCoils: number | null
+    number: string | null
+    order: string | null
+    width: number | null
+    thick: number | null
     createAt: Date | null
   }
 
   export type Coils3CountAggregateOutputType = {
-    id: number
+    programID: number
     status: number
     numberCoils: number
+    number: number
+    order: number
+    width: number
+    thick: number
     createAt: number
     _all: number
   }
 
 
   export type Coils3AvgAggregateInputType = {
-    id?: true
+    programID?: true
     numberCoils?: true
+    width?: true
+    thick?: true
   }
 
   export type Coils3SumAggregateInputType = {
-    id?: true
+    programID?: true
     numberCoils?: true
+    width?: true
+    thick?: true
   }
 
   export type Coils3MinAggregateInputType = {
-    id?: true
+    programID?: true
     status?: true
     numberCoils?: true
+    number?: true
+    order?: true
+    width?: true
+    thick?: true
     createAt?: true
   }
 
   export type Coils3MaxAggregateInputType = {
-    id?: true
+    programID?: true
     status?: true
     numberCoils?: true
+    number?: true
+    order?: true
+    width?: true
+    thick?: true
     createAt?: true
   }
 
   export type Coils3CountAggregateInputType = {
-    id?: true
+    programID?: true
     status?: true
     numberCoils?: true
+    number?: true
+    order?: true
+    width?: true
+    thick?: true
     createAt?: true
     _all?: true
   }
@@ -1001,9 +1033,13 @@ export namespace Prisma {
   }
 
   export type Coils3GroupByOutputType = {
-    id: number
+    programID: number
     status: boolean
     numberCoils: number
+    number: string
+    order: string
+    width: number
+    thick: number
     createAt: Date
     _count: Coils3CountAggregateOutputType | null
     _avg: Coils3AvgAggregateOutputType | null
@@ -1027,17 +1063,25 @@ export namespace Prisma {
 
 
   export type Coils3Select<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
+    programID?: boolean
     status?: boolean
     numberCoils?: boolean
+    number?: boolean
+    order?: boolean
+    width?: boolean
+    thick?: boolean
     createAt?: boolean
   }, ExtArgs["result"]["coils3"]>
 
 
   export type Coils3SelectScalar = {
-    id?: boolean
+    programID?: boolean
     status?: boolean
     numberCoils?: boolean
+    number?: boolean
+    order?: boolean
+    width?: boolean
+    thick?: boolean
     createAt?: boolean
   }
 
@@ -1046,9 +1090,13 @@ export namespace Prisma {
     name: "Coils3"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      id: number
+      programID: number
       status: boolean
       numberCoils: number
+      number: string
+      order: string
+      width: number
+      thick: number
       createAt: Date
     }, ExtArgs["result"]["coils3"]>
     composites: {}
@@ -1133,8 +1181,8 @@ export namespace Prisma {
      * // Get first 10 Coils3s
      * const coils3s = await prisma.coils3.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const coils3WithIdOnly = await prisma.coils3.findMany({ select: { id: true } })
+     * // Only select the `programID`
+     * const coils3WithProgramIDOnly = await prisma.coils3.findMany({ select: { programID: true } })
      * 
      */
     findMany<T extends Coils3FindManyArgs>(args?: SelectSubset<T, Coils3FindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Coils3Payload<ExtArgs>, T, "findMany">>
@@ -1419,9 +1467,13 @@ export namespace Prisma {
    * Fields of the Coils3 model
    */ 
   interface Coils3FieldRefs {
-    readonly id: FieldRef<"Coils3", 'Int'>
+    readonly programID: FieldRef<"Coils3", 'Int'>
     readonly status: FieldRef<"Coils3", 'Boolean'>
     readonly numberCoils: FieldRef<"Coils3", 'Int'>
+    readonly number: FieldRef<"Coils3", 'String'>
+    readonly order: FieldRef<"Coils3", 'String'>
+    readonly width: FieldRef<"Coils3", 'Int'>
+    readonly thick: FieldRef<"Coils3", 'Int'>
     readonly createAt: FieldRef<"Coils3", 'DateTime'>
   }
     
@@ -1711,9 +1763,13 @@ export namespace Prisma {
 
 
   export const Coils3ScalarFieldEnum: {
-    id: 'id',
+    programID: 'programID',
     status: 'status',
     numberCoils: 'numberCoils',
+    number: 'number',
+    order: 'order',
+    width: 'width',
+    thick: 'thick',
     createAt: 'createAt'
   };
 
@@ -1748,6 +1804,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'String'
+   */
+  export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -1768,33 +1831,49 @@ export namespace Prisma {
     AND?: Coils3WhereInput | Coils3WhereInput[]
     OR?: Coils3WhereInput[]
     NOT?: Coils3WhereInput | Coils3WhereInput[]
-    id?: IntFilter<"Coils3"> | number
+    programID?: IntFilter<"Coils3"> | number
     status?: BoolFilter<"Coils3"> | boolean
     numberCoils?: IntFilter<"Coils3"> | number
+    number?: StringFilter<"Coils3"> | string
+    order?: StringFilter<"Coils3"> | string
+    width?: IntFilter<"Coils3"> | number
+    thick?: IntFilter<"Coils3"> | number
     createAt?: DateTimeFilter<"Coils3"> | Date | string
   }
 
   export type Coils3OrderByWithRelationInput = {
-    id?: SortOrder
+    programID?: SortOrder
     status?: SortOrder
     numberCoils?: SortOrder
+    number?: SortOrder
+    order?: SortOrder
+    width?: SortOrder
+    thick?: SortOrder
     createAt?: SortOrder
   }
 
   export type Coils3WhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    programID?: number
+    number?: string
     AND?: Coils3WhereInput | Coils3WhereInput[]
     OR?: Coils3WhereInput[]
     NOT?: Coils3WhereInput | Coils3WhereInput[]
     status?: BoolFilter<"Coils3"> | boolean
     numberCoils?: IntFilter<"Coils3"> | number
+    order?: StringFilter<"Coils3"> | string
+    width?: IntFilter<"Coils3"> | number
+    thick?: IntFilter<"Coils3"> | number
     createAt?: DateTimeFilter<"Coils3"> | Date | string
-  }, "id">
+  }, "programID" | "number">
 
   export type Coils3OrderByWithAggregationInput = {
-    id?: SortOrder
+    programID?: SortOrder
     status?: SortOrder
     numberCoils?: SortOrder
+    number?: SortOrder
+    order?: SortOrder
+    width?: SortOrder
+    thick?: SortOrder
     createAt?: SortOrder
     _count?: Coils3CountOrderByAggregateInput
     _avg?: Coils3AvgOrderByAggregateInput
@@ -1807,55 +1886,87 @@ export namespace Prisma {
     AND?: Coils3ScalarWhereWithAggregatesInput | Coils3ScalarWhereWithAggregatesInput[]
     OR?: Coils3ScalarWhereWithAggregatesInput[]
     NOT?: Coils3ScalarWhereWithAggregatesInput | Coils3ScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Coils3"> | number
+    programID?: IntWithAggregatesFilter<"Coils3"> | number
     status?: BoolWithAggregatesFilter<"Coils3"> | boolean
     numberCoils?: IntWithAggregatesFilter<"Coils3"> | number
+    number?: StringWithAggregatesFilter<"Coils3"> | string
+    order?: StringWithAggregatesFilter<"Coils3"> | string
+    width?: IntWithAggregatesFilter<"Coils3"> | number
+    thick?: IntWithAggregatesFilter<"Coils3"> | number
     createAt?: DateTimeWithAggregatesFilter<"Coils3"> | Date | string
   }
 
   export type Coils3CreateInput = {
     status: boolean
     numberCoils: number
+    number: string
+    order: string
+    width: number
+    thick: number
     createAt?: Date | string
   }
 
   export type Coils3UncheckedCreateInput = {
-    id?: number
+    programID?: number
     status: boolean
     numberCoils: number
+    number: string
+    order: string
+    width: number
+    thick: number
     createAt?: Date | string
   }
 
   export type Coils3UpdateInput = {
     status?: BoolFieldUpdateOperationsInput | boolean
     numberCoils?: IntFieldUpdateOperationsInput | number
+    number?: StringFieldUpdateOperationsInput | string
+    order?: StringFieldUpdateOperationsInput | string
+    width?: IntFieldUpdateOperationsInput | number
+    thick?: IntFieldUpdateOperationsInput | number
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type Coils3UncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    programID?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     numberCoils?: IntFieldUpdateOperationsInput | number
+    number?: StringFieldUpdateOperationsInput | string
+    order?: StringFieldUpdateOperationsInput | string
+    width?: IntFieldUpdateOperationsInput | number
+    thick?: IntFieldUpdateOperationsInput | number
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type Coils3CreateManyInput = {
-    id?: number
+    programID?: number
     status: boolean
     numberCoils: number
+    number: string
+    order: string
+    width: number
+    thick: number
     createAt?: Date | string
   }
 
   export type Coils3UpdateManyMutationInput = {
     status?: BoolFieldUpdateOperationsInput | boolean
     numberCoils?: IntFieldUpdateOperationsInput | number
+    number?: StringFieldUpdateOperationsInput | string
+    order?: StringFieldUpdateOperationsInput | string
+    width?: IntFieldUpdateOperationsInput | number
+    thick?: IntFieldUpdateOperationsInput | number
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type Coils3UncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    programID?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     numberCoils?: IntFieldUpdateOperationsInput | number
+    number?: StringFieldUpdateOperationsInput | string
+    order?: StringFieldUpdateOperationsInput | string
+    width?: IntFieldUpdateOperationsInput | number
+    thick?: IntFieldUpdateOperationsInput | number
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -1875,6 +1986,20 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type StringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringFilter<$PrismaModel> | string
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -1887,34 +2012,50 @@ export namespace Prisma {
   }
 
   export type Coils3CountOrderByAggregateInput = {
-    id?: SortOrder
+    programID?: SortOrder
     status?: SortOrder
     numberCoils?: SortOrder
+    number?: SortOrder
+    order?: SortOrder
+    width?: SortOrder
+    thick?: SortOrder
     createAt?: SortOrder
   }
 
   export type Coils3AvgOrderByAggregateInput = {
-    id?: SortOrder
+    programID?: SortOrder
     numberCoils?: SortOrder
+    width?: SortOrder
+    thick?: SortOrder
   }
 
   export type Coils3MaxOrderByAggregateInput = {
-    id?: SortOrder
+    programID?: SortOrder
     status?: SortOrder
     numberCoils?: SortOrder
+    number?: SortOrder
+    order?: SortOrder
+    width?: SortOrder
+    thick?: SortOrder
     createAt?: SortOrder
   }
 
   export type Coils3MinOrderByAggregateInput = {
-    id?: SortOrder
+    programID?: SortOrder
     status?: SortOrder
     numberCoils?: SortOrder
+    number?: SortOrder
+    order?: SortOrder
+    width?: SortOrder
+    thick?: SortOrder
     createAt?: SortOrder
   }
 
   export type Coils3SumOrderByAggregateInput = {
-    id?: SortOrder
+    programID?: SortOrder
     numberCoils?: SortOrder
+    width?: SortOrder
+    thick?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -1939,6 +2080,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -1967,6 +2125,10 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type StringFieldUpdateOperationsInput = {
+    set?: string
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -1985,6 +2147,20 @@ export namespace Prisma {
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedStringFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -2031,6 +2207,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[]
+    notIn?: string[]
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {

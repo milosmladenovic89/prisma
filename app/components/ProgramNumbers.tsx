@@ -4,8 +4,19 @@ import { Coils } from "@prisma/client"
 import { useEffect, useState } from "react"
 
 
+type FinishedPrograms = {
+    programID: number;
+    status: boolean;
+    numberCoils: number;
+    number: string;
+    order: string;
+    width: number;
+    thick: number;
+    createAt: Date;
+}
+
 export default function ProgramNumbers() {
-    const [state, setState] = useState<Coils[]>([])
+    const [state, setState] = useState<FinishedPrograms[]>([])
 
     useEffect(() => {
         async function ProgramNumber() {
@@ -13,7 +24,7 @@ export default function ProgramNumbers() {
             setState(programNumbers)
         }
         ProgramNumber()
-        
+
     }, [])
 
     return (
@@ -27,10 +38,10 @@ export default function ProgramNumbers() {
             </thead>
             <tbody>
                 {state.map((item) => (
-                    <tr key={item.id}>
-                        <td className='border border-black p-0 m-0'>{item.id}</td>
-                        <td className='border border-black p-0 m-0'>{item.id}</td>
-                        <td className='border border-black p-0 m-0'>{item.id}</td>
+                    <tr key={item.programID}>
+                        <td className='border border-black p-0 m-0'>{item.programID}</td>
+                        <td className='border border-black p-0 m-0'>{item.programID}</td>
+                        <td className='border border-black p-0 m-0'>{item.programID}</td>
                     </tr>
                 ))}
             </tbody>

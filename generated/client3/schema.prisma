@@ -15,10 +15,12 @@ datasource db3 {
 }
 
 model Coils3 {
-  id       Int      @id @default(autoincrement())
-  number   String   @unique
-  order    String
-  width    Int
-  thick    Int
-  createAt DateTime @default(now())
+  programID   Int      @id @default(autoincrement())
+  status      Boolean
+  numberCoils Int
+  number      String   @unique
+  order       String
+  width       Int
+  thick       Int
+  createAt    DateTime @default(now())
 }

@@ -59,7 +59,7 @@ export async function AddCoilToDatabase(formData: FormData,) {
 export async function GetAllCoilsFromTHIRDdatabase() {
         const coils = await prisma3.coils3.findMany({
                 orderBy: {
-                        id: 'desc'
+                        programID: 'desc'
 
                 }
         })
@@ -188,7 +188,6 @@ export async function moveTOFirstDatabase(order: Array<Coils>) {
                         }
                 }
         })
-
 
         revalidatePath('/move')
 
