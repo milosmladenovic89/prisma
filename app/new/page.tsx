@@ -1,7 +1,8 @@
 'use client'
 
 import { Coils } from "@/generated/client1";
-import { FilteredCoils, moveTOFirstDatabase } from "@/utils/action";
+import { CreateProgramNumber, FilteredCoils, moveTOFirstDatabase } from "@/utils/action";
+import Link from "next/link";
 import { useState } from "react";
 
 export default function NewProgram() {
@@ -32,7 +33,7 @@ export default function NewProgram() {
 
       <div className="h-full">
 
-
+        {/*STEP 1*/}
         {nextClick === true && <div className='w-70v h-75v border border-black' >
 
 
@@ -135,7 +136,7 @@ export default function NewProgram() {
         </div>}
 
 
-
+        {/*STEP 2*/}
 
         {backClick === false &&
           <div className='w-70v h-75v border border-black flex flex-col' >
@@ -152,15 +153,17 @@ export default function NewProgram() {
                 setBackClick(pre => !pre)
               }}>Back</button>
               <button className='btn btn-primary m-1' disabled>Next</button>
-              <button className='btn btn-primary m-1'
-                onClick={
-                  async () => {
-                    //await moveTOFirstDatabase(sortedCoils)
-                    await console.log(sortedCoils)
-                    
-                  }}
-                  
-              >Finish</button>
+              <Link href={'/move'}>
+                <button className='btn btn-primary m-1'
+                  onClick={
+                    async () => {
+                      await moveTOFirstDatabase(sortedCoils)
+                      await CreateProgramNumber()
+
+                    }}
+
+                >Finish</button>
+              </Link>
             </div>
 
 

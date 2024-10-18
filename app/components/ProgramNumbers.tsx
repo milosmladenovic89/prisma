@@ -1,17 +1,18 @@
 'use client'
 import { GetAllCoilsFromTHIRDdatabase } from "@/utils/action"
-import { Coils } from "@prisma/client"
+import { JsonValue } from "@prisma/client/runtime/library";
+
 import { useEffect, useState } from "react"
 
 
 type FinishedPrograms = {
-    programID: number;
+    id: number;
     status: boolean;
     numberCoils: number;
-    number: string;
-    order: string;
-    width: number;
-    thick: number;
+    number: JsonValue; // Allow any JSON value
+    order: JsonValue;
+    width: JsonValue;
+    thick: JsonValue;
     createAt: Date;
 }
 
@@ -38,10 +39,10 @@ export default function ProgramNumbers() {
             </thead>
             <tbody>
                 {state.map((item) => (
-                    <tr key={item.programID}>
-                        <td className='border border-black p-0 m-0'>{item.programID}</td>
-                        <td className='border border-black p-0 m-0'>{item.programID}</td>
-                        <td className='border border-black p-0 m-0'>{item.programID}</td>
+                    <tr key={item.id}>
+                        <td className='border border-black p-0 m-0'>{item.id}</td>
+                        <td className='border border-black p-0 m-0'>{item.status === false && 'N'}</td>
+                        <td className='border border-black p-0 m-0'>{item.numberCoils}</td>
                     </tr>
                 ))}
             </tbody>

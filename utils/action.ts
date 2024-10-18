@@ -19,19 +19,19 @@ export async function FilteredCoils(widthMin: number, widthMax: number): Promise
         width: number;
         thick: number;
         createAt: Date;
-    }[]> {
+}[]> {
         const coils = await prisma1.coils.findMany({
-            where: {
-                width: {
-                    gte: widthMin,
-                    lte: widthMax,
+                where: {
+                        width: {
+                                gte: widthMin,
+                                lte: widthMax,
+                        },
                 },
-            },
         });
-       
+
         return coils;
-    }
-    
+}
+
 
 
 export async function AddCoilToDatabase(formData: FormData,) {
@@ -59,7 +59,7 @@ export async function AddCoilToDatabase(formData: FormData,) {
 export async function GetAllCoilsFromTHIRDdatabase() {
         const coils = await prisma3.coils3.findMany({
                 orderBy: {
-                        programID: 'desc'
+                        id: 'desc'
 
                 }
         })
@@ -102,7 +102,7 @@ export async function create2({ order }: any) {
 
 
 
-// Example usage
+
 export async function fetchDataFromSecondDatabase() {
 
         const data = await prisma2.coils2.findMany({
@@ -178,6 +178,7 @@ export async function moveTOFirstDatabase(order: Array<Coils>) {
 
         await prisma2.coils2.createMany({
                 data: orderToMove,
+                skipDuplicates:true
         });
 
 
@@ -190,9 +191,50 @@ export async function moveTOFirstDatabase(order: Array<Coils>) {
         })
 
         revalidatePath('/move')
+        revalidatePath('/new')
+        revalidatePath('/')
 
 }
 
 
+
+export async function CreateProgramNumber() {
+
+        const coils = await prisma2.coils2.findMany()
+
+        const coilsInProgram = coils.length
+        const numberCoil = await prisma2.coils2.findMany({
+                select: { number: true }
+        })
+
+        const orderCoil = await prisma2.coils2.findMany({
+                select: { order: true },
+                distinct: ['order']
+        })
+
+        const orderWidth = await prisma2.coils2.findMany({
+                select: { width: true },
+                distinct:['width']
+        })
+        const orderThick = await prisma2.coils2.findMany({
+                select: { thick: true },
+                distinct:['thick']
+        })
+
+        await prisma3.coils3.createMany({
+                data: {
+                        status: false,
+                        numberCoils: coilsInProgram,
+                        number: numberCoil,
+                        order: orderCoil,
+                        width: orderWidth,
+                        thick: orderThick
+                }
+        })
+        revalidatePath('/move')
+        revalidatePath('/new')
+        revalidatePath('/')
+
+}
 
 

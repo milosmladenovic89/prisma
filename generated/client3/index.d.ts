@@ -850,43 +850,31 @@ export namespace Prisma {
   }
 
   export type Coils3AvgAggregateOutputType = {
-    programID: number | null
+    id: number | null
     numberCoils: number | null
-    width: number | null
-    thick: number | null
   }
 
   export type Coils3SumAggregateOutputType = {
-    programID: number | null
+    id: number | null
     numberCoils: number | null
-    width: number | null
-    thick: number | null
   }
 
   export type Coils3MinAggregateOutputType = {
-    programID: number | null
+    id: number | null
     status: boolean | null
     numberCoils: number | null
-    number: string | null
-    order: string | null
-    width: number | null
-    thick: number | null
     createAt: Date | null
   }
 
   export type Coils3MaxAggregateOutputType = {
-    programID: number | null
+    id: number | null
     status: boolean | null
     numberCoils: number | null
-    number: string | null
-    order: string | null
-    width: number | null
-    thick: number | null
     createAt: Date | null
   }
 
   export type Coils3CountAggregateOutputType = {
-    programID: number
+    id: number
     status: number
     numberCoils: number
     number: number
@@ -899,43 +887,31 @@ export namespace Prisma {
 
 
   export type Coils3AvgAggregateInputType = {
-    programID?: true
+    id?: true
     numberCoils?: true
-    width?: true
-    thick?: true
   }
 
   export type Coils3SumAggregateInputType = {
-    programID?: true
+    id?: true
     numberCoils?: true
-    width?: true
-    thick?: true
   }
 
   export type Coils3MinAggregateInputType = {
-    programID?: true
+    id?: true
     status?: true
     numberCoils?: true
-    number?: true
-    order?: true
-    width?: true
-    thick?: true
     createAt?: true
   }
 
   export type Coils3MaxAggregateInputType = {
-    programID?: true
+    id?: true
     status?: true
     numberCoils?: true
-    number?: true
-    order?: true
-    width?: true
-    thick?: true
     createAt?: true
   }
 
   export type Coils3CountAggregateInputType = {
-    programID?: true
+    id?: true
     status?: true
     numberCoils?: true
     number?: true
@@ -1033,13 +1009,13 @@ export namespace Prisma {
   }
 
   export type Coils3GroupByOutputType = {
-    programID: number
+    id: number
     status: boolean
     numberCoils: number
-    number: string
-    order: string
-    width: number
-    thick: number
+    number: JsonValue
+    order: JsonValue
+    width: JsonValue
+    thick: JsonValue
     createAt: Date
     _count: Coils3CountAggregateOutputType | null
     _avg: Coils3AvgAggregateOutputType | null
@@ -1063,7 +1039,7 @@ export namespace Prisma {
 
 
   export type Coils3Select<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    programID?: boolean
+    id?: boolean
     status?: boolean
     numberCoils?: boolean
     number?: boolean
@@ -1075,7 +1051,7 @@ export namespace Prisma {
 
 
   export type Coils3SelectScalar = {
-    programID?: boolean
+    id?: boolean
     status?: boolean
     numberCoils?: boolean
     number?: boolean
@@ -1090,13 +1066,13 @@ export namespace Prisma {
     name: "Coils3"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
-      programID: number
+      id: number
       status: boolean
       numberCoils: number
-      number: string
-      order: string
-      width: number
-      thick: number
+      number: Prisma.JsonValue
+      order: Prisma.JsonValue
+      width: Prisma.JsonValue
+      thick: Prisma.JsonValue
       createAt: Date
     }, ExtArgs["result"]["coils3"]>
     composites: {}
@@ -1181,8 +1157,8 @@ export namespace Prisma {
      * // Get first 10 Coils3s
      * const coils3s = await prisma.coils3.findMany({ take: 10 })
      * 
-     * // Only select the `programID`
-     * const coils3WithProgramIDOnly = await prisma.coils3.findMany({ select: { programID: true } })
+     * // Only select the `id`
+     * const coils3WithIdOnly = await prisma.coils3.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends Coils3FindManyArgs>(args?: SelectSubset<T, Coils3FindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Coils3Payload<ExtArgs>, T, "findMany">>
@@ -1467,13 +1443,13 @@ export namespace Prisma {
    * Fields of the Coils3 model
    */ 
   interface Coils3FieldRefs {
-    readonly programID: FieldRef<"Coils3", 'Int'>
+    readonly id: FieldRef<"Coils3", 'Int'>
     readonly status: FieldRef<"Coils3", 'Boolean'>
     readonly numberCoils: FieldRef<"Coils3", 'Int'>
-    readonly number: FieldRef<"Coils3", 'String'>
-    readonly order: FieldRef<"Coils3", 'String'>
-    readonly width: FieldRef<"Coils3", 'Int'>
-    readonly thick: FieldRef<"Coils3", 'Int'>
+    readonly number: FieldRef<"Coils3", 'Json'>
+    readonly order: FieldRef<"Coils3", 'Json'>
+    readonly width: FieldRef<"Coils3", 'Json'>
+    readonly thick: FieldRef<"Coils3", 'Json'>
     readonly createAt: FieldRef<"Coils3", 'DateTime'>
   }
     
@@ -1763,7 +1739,7 @@ export namespace Prisma {
 
 
   export const Coils3ScalarFieldEnum: {
-    programID: 'programID',
+    id: 'id',
     status: 'status',
     numberCoils: 'numberCoils',
     number: 'number',
@@ -1784,6 +1760,22 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
+
+
   /**
    * Field references 
    */
@@ -1800,6 +1792,13 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
     
 
 
@@ -1831,18 +1830,18 @@ export namespace Prisma {
     AND?: Coils3WhereInput | Coils3WhereInput[]
     OR?: Coils3WhereInput[]
     NOT?: Coils3WhereInput | Coils3WhereInput[]
-    programID?: IntFilter<"Coils3"> | number
+    id?: IntFilter<"Coils3"> | number
     status?: BoolFilter<"Coils3"> | boolean
     numberCoils?: IntFilter<"Coils3"> | number
-    number?: StringFilter<"Coils3"> | string
-    order?: StringFilter<"Coils3"> | string
-    width?: IntFilter<"Coils3"> | number
-    thick?: IntFilter<"Coils3"> | number
+    number?: JsonFilter<"Coils3">
+    order?: JsonFilter<"Coils3">
+    width?: JsonFilter<"Coils3">
+    thick?: JsonFilter<"Coils3">
     createAt?: DateTimeFilter<"Coils3"> | Date | string
   }
 
   export type Coils3OrderByWithRelationInput = {
-    programID?: SortOrder
+    id?: SortOrder
     status?: SortOrder
     numberCoils?: SortOrder
     number?: SortOrder
@@ -1853,21 +1852,21 @@ export namespace Prisma {
   }
 
   export type Coils3WhereUniqueInput = Prisma.AtLeast<{
-    programID?: number
-    number?: string
+    id?: number
     AND?: Coils3WhereInput | Coils3WhereInput[]
     OR?: Coils3WhereInput[]
     NOT?: Coils3WhereInput | Coils3WhereInput[]
     status?: BoolFilter<"Coils3"> | boolean
     numberCoils?: IntFilter<"Coils3"> | number
-    order?: StringFilter<"Coils3"> | string
-    width?: IntFilter<"Coils3"> | number
-    thick?: IntFilter<"Coils3"> | number
+    number?: JsonFilter<"Coils3">
+    order?: JsonFilter<"Coils3">
+    width?: JsonFilter<"Coils3">
+    thick?: JsonFilter<"Coils3">
     createAt?: DateTimeFilter<"Coils3"> | Date | string
-  }, "programID" | "number">
+  }, "id">
 
   export type Coils3OrderByWithAggregationInput = {
-    programID?: SortOrder
+    id?: SortOrder
     status?: SortOrder
     numberCoils?: SortOrder
     number?: SortOrder
@@ -1886,87 +1885,87 @@ export namespace Prisma {
     AND?: Coils3ScalarWhereWithAggregatesInput | Coils3ScalarWhereWithAggregatesInput[]
     OR?: Coils3ScalarWhereWithAggregatesInput[]
     NOT?: Coils3ScalarWhereWithAggregatesInput | Coils3ScalarWhereWithAggregatesInput[]
-    programID?: IntWithAggregatesFilter<"Coils3"> | number
+    id?: IntWithAggregatesFilter<"Coils3"> | number
     status?: BoolWithAggregatesFilter<"Coils3"> | boolean
     numberCoils?: IntWithAggregatesFilter<"Coils3"> | number
-    number?: StringWithAggregatesFilter<"Coils3"> | string
-    order?: StringWithAggregatesFilter<"Coils3"> | string
-    width?: IntWithAggregatesFilter<"Coils3"> | number
-    thick?: IntWithAggregatesFilter<"Coils3"> | number
+    number?: JsonWithAggregatesFilter<"Coils3">
+    order?: JsonWithAggregatesFilter<"Coils3">
+    width?: JsonWithAggregatesFilter<"Coils3">
+    thick?: JsonWithAggregatesFilter<"Coils3">
     createAt?: DateTimeWithAggregatesFilter<"Coils3"> | Date | string
   }
 
   export type Coils3CreateInput = {
     status: boolean
     numberCoils: number
-    number: string
-    order: string
-    width: number
-    thick: number
+    number: JsonNullValueInput | InputJsonValue
+    order: JsonNullValueInput | InputJsonValue
+    width: JsonNullValueInput | InputJsonValue
+    thick: JsonNullValueInput | InputJsonValue
     createAt?: Date | string
   }
 
   export type Coils3UncheckedCreateInput = {
-    programID?: number
+    id?: number
     status: boolean
     numberCoils: number
-    number: string
-    order: string
-    width: number
-    thick: number
+    number: JsonNullValueInput | InputJsonValue
+    order: JsonNullValueInput | InputJsonValue
+    width: JsonNullValueInput | InputJsonValue
+    thick: JsonNullValueInput | InputJsonValue
     createAt?: Date | string
   }
 
   export type Coils3UpdateInput = {
     status?: BoolFieldUpdateOperationsInput | boolean
     numberCoils?: IntFieldUpdateOperationsInput | number
-    number?: StringFieldUpdateOperationsInput | string
-    order?: StringFieldUpdateOperationsInput | string
-    width?: IntFieldUpdateOperationsInput | number
-    thick?: IntFieldUpdateOperationsInput | number
+    number?: JsonNullValueInput | InputJsonValue
+    order?: JsonNullValueInput | InputJsonValue
+    width?: JsonNullValueInput | InputJsonValue
+    thick?: JsonNullValueInput | InputJsonValue
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type Coils3UncheckedUpdateInput = {
-    programID?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     numberCoils?: IntFieldUpdateOperationsInput | number
-    number?: StringFieldUpdateOperationsInput | string
-    order?: StringFieldUpdateOperationsInput | string
-    width?: IntFieldUpdateOperationsInput | number
-    thick?: IntFieldUpdateOperationsInput | number
+    number?: JsonNullValueInput | InputJsonValue
+    order?: JsonNullValueInput | InputJsonValue
+    width?: JsonNullValueInput | InputJsonValue
+    thick?: JsonNullValueInput | InputJsonValue
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type Coils3CreateManyInput = {
-    programID?: number
+    id?: number
     status: boolean
     numberCoils: number
-    number: string
-    order: string
-    width: number
-    thick: number
+    number: JsonNullValueInput | InputJsonValue
+    order: JsonNullValueInput | InputJsonValue
+    width: JsonNullValueInput | InputJsonValue
+    thick: JsonNullValueInput | InputJsonValue
     createAt?: Date | string
   }
 
   export type Coils3UpdateManyMutationInput = {
     status?: BoolFieldUpdateOperationsInput | boolean
     numberCoils?: IntFieldUpdateOperationsInput | number
-    number?: StringFieldUpdateOperationsInput | string
-    order?: StringFieldUpdateOperationsInput | string
-    width?: IntFieldUpdateOperationsInput | number
-    thick?: IntFieldUpdateOperationsInput | number
+    number?: JsonNullValueInput | InputJsonValue
+    order?: JsonNullValueInput | InputJsonValue
+    width?: JsonNullValueInput | InputJsonValue
+    thick?: JsonNullValueInput | InputJsonValue
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type Coils3UncheckedUpdateManyInput = {
-    programID?: IntFieldUpdateOperationsInput | number
+    id?: IntFieldUpdateOperationsInput | number
     status?: BoolFieldUpdateOperationsInput | boolean
     numberCoils?: IntFieldUpdateOperationsInput | number
-    number?: StringFieldUpdateOperationsInput | string
-    order?: StringFieldUpdateOperationsInput | string
-    width?: IntFieldUpdateOperationsInput | number
-    thick?: IntFieldUpdateOperationsInput | number
+    number?: JsonNullValueInput | InputJsonValue
+    order?: JsonNullValueInput | InputJsonValue
+    width?: JsonNullValueInput | InputJsonValue
+    thick?: JsonNullValueInput | InputJsonValue
     createAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -1985,19 +1984,27 @@ export namespace Prisma {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
+  export type JsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
 
-  export type StringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringFilter<$PrismaModel> | string
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -2012,7 +2019,7 @@ export namespace Prisma {
   }
 
   export type Coils3CountOrderByAggregateInput = {
-    programID?: SortOrder
+    id?: SortOrder
     status?: SortOrder
     numberCoils?: SortOrder
     number?: SortOrder
@@ -2023,39 +2030,27 @@ export namespace Prisma {
   }
 
   export type Coils3AvgOrderByAggregateInput = {
-    programID?: SortOrder
+    id?: SortOrder
     numberCoils?: SortOrder
-    width?: SortOrder
-    thick?: SortOrder
   }
 
   export type Coils3MaxOrderByAggregateInput = {
-    programID?: SortOrder
+    id?: SortOrder
     status?: SortOrder
     numberCoils?: SortOrder
-    number?: SortOrder
-    order?: SortOrder
-    width?: SortOrder
-    thick?: SortOrder
     createAt?: SortOrder
   }
 
   export type Coils3MinOrderByAggregateInput = {
-    programID?: SortOrder
+    id?: SortOrder
     status?: SortOrder
     numberCoils?: SortOrder
-    number?: SortOrder
-    order?: SortOrder
-    width?: SortOrder
-    thick?: SortOrder
     createAt?: SortOrder
   }
 
   export type Coils3SumOrderByAggregateInput = {
-    programID?: SortOrder
+    id?: SortOrder
     numberCoils?: SortOrder
-    width?: SortOrder
-    thick?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -2081,22 +2076,30 @@ export namespace Prisma {
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
   }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -2125,10 +2128,6 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type StringFieldUpdateOperationsInput = {
-    set?: string
-  }
-
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
@@ -2147,20 +2146,6 @@ export namespace Prisma {
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedStringFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -2208,22 +2193,27 @@ export namespace Prisma {
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
   }
+  export type NestedJsonFilter<$PrismaModel = never> = 
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue
+    lte?: InputJsonValue
+    gt?: InputJsonValue
+    gte?: InputJsonValue
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
